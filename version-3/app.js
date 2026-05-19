@@ -3,13 +3,13 @@ import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWith
 import { getFirestore, doc, getDoc, setDoc, collection, query, orderBy, limit, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_PROJECT.appspot.com",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId: "PASTE_APP_ID"
-};
+    apiKey: "AIzaSyCPPM8nbmJ5a8zlygf00br7dWtw3-mUNog",
+    authDomain: "math-hero-6c5f5.firebaseapp.com",
+    projectId: "math-hero-6c5f5",
+    storageBucket: "math-hero-6c5f5.firebasestorage.app",
+    messagingSenderId: "451348024908",
+    appId: "1:451348024908:web:b9c98c21e692fdaedf2ee9"
+  };
 
 const firebaseReady = !firebaseConfig.apiKey.includes("PASTE_");
 let app, auth, db;
