@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Math Hero</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.svg" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="toast" class="toast hidden"></div>
+
+  <header class="top-bar">
+    <button class="top-stat active" data-panel="language">🇺🇦 <b id="topLang">6</b></button>
+    <button class="top-stat" data-panel="streak">🔥 <b id="topStreak">0</b></button>
+    <button class="top-stat" data-panel="gems">💎 <b id="topGems">0</b></button>
+    <button class="top-stat" data-panel="energy">⚡ <b id="topEnergy">25</b></button>
+  </header>
+
+  <main class="main">
+    <section id="home" class="screen active">
+      <section class="course-scroll">
+        <button class="course active" data-lang="ua">🇺🇦<span>Математика</span></button>
+        <button class="course" data-lang="de">🇩🇪<span>Німецька</span></button>
+        <button class="course" data-lang="en">🇬🇧<span>Англійська</span></button>
+        <button class="course muted" data-panel="addCourse">＋<span>Курс</span></button>
+      </section>
+
+      <section class="rating-card">
+        <div class="rating-line">
+          <b id="levelLeft">1</b>
+          <div class="rating-track"><span id="levelBar"></span></div>
+          <b id="levelRight">2</b>
+        </div>
+        <p id="ratingText">Твій рівень математики — 1</p>
+        <button data-panel="level">ДОКЛАДНІШЕ ПРО РІВЕНЬ</button>
+      </section>
+
+      <section class="lesson-path">
+        <button class="lesson crown" data-panel="bonus">👑</button>
+        <button class="lesson" data-start="easy">🧠</button>
+        <button class="lesson side-left" data-start="medium">⚡</button>
+        <button class="lesson side-right" data-start="hard">🔥</button>
+        <button class="lesson locked">🔒</button>
+        <button class="lesson" data-panel="shop">🛒</button>
+      </section>
+    </section>
+
+    <section id="chests" class="screen">
+      <h1>Скрині</h1>
+      <button class="list-card">🎁 <b>Денна скриня</b><em>Безкоштовно</em></button>
+      <button class="list-card">🏆 <b>Скриня перемог</b><em>300 💎</em></button>
+      <button class="list-card disabled">🔒 <b>Скриня чемпіона</b><em>Недоступно</em></button>
+    </section>
+
+    <section id="rank" class="screen">
+      <h1>Ранг</h1>
+      <div id="leaderboard" class="leaderboard"></div>
+    </section>
+
+    <section id="friends" class="screen">
+      <h1>Друзі</h1>
+      <p class="page-text">Запрошуй друзів і змагайся.</p>
+      <button id="shareBtn" class="blue-button">Поділитися</button>
+    </section>
+
+    <section id="profile" class="screen">
+      <div class="profile-card">
+        <div class="avatar">🧒</div>
+        <h1 id="profileName">Гість</h1>
+        <p><span id="profileXp">0</span> XP · Рівень <span id="profileLevel">1</span></p>
+        <button id="loginBtn" class="blue-button">Login / Register</button>
+        <button id="logoutBtn" class="blue-button gray hidden">Вийти</button>
+      </div>
+      <h2>Досягнення</h2>
+      <div id="badges" class="badges"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav active" data-screen="home">🏠<span>Головна</span></button>
+    <button class="nav" data-screen="chests">🧰<span>Скрині</span></button>
+    <button class="nav" data-screen="rank">🏆<span>Ранг</span></button>
+    <button class="nav" data-screen="friends">👥<span>Друзі</span></button>
+    <button class="nav" data-screen="profile">👤<span>Профіль</span></button>
+  </nav>
+
+  <dialog id="panelDialog" class="full-dialog">
+    <header class="dialog-header">
+      <button id="closePanel" class="x">×</button>
+      <h2 id="panelTitle">Меню</h2>
+      <b id="panelMoney">💎 0</b>
+    </header>
+    <div id="panelBody" class="dialog-body"></div>
+  </dialog>
+
+  <dialog id="gameDialog" class="full-dialog">
+    <header class="dialog-header">
+      <button id="closeGame" class="x">×</button>
+      <h2 id="gameTitle">Тренування</h2>
+      <button id="restartGame" class="reload">↻</button>
+    </header>
+    <div class="game-progress"><span id="gameBar"></span></div>
+    <section class="question-card">
+      <div id="questionText" class="question-text">8 + 5 = ?</div>
+      <div id="answerText" class="answer-text"></div>
+      <small id="gameCount">0 / 20</small>
+    </section>
+    <section class="keypad">
+      <button>1</button><button>2</button><button>3</button>
+      <button>4</button><button>5</button><button>6</button>
+      <button>7</button><button>8</button><button>9</button>
+      <button data-key="back">⌫</button><button>0</button><button data-key="ok">OK</button>
+    </section>
+  </dialog>
+
+  <dialog id="authDialog" class="full-dialog">
+    <header class="dialog-header">
+      <button id="closeAuth" class="x">×</button>
+      <h2>Login</h2>
+      <span></span>
+    </header>
+    <section class="auth-box">
+      <input id="email" type="email" placeholder="E-Mail">
+      <input id="password" type="password" placeholder="Passwort">
+      <button id="registerBtn" class="blue-button">Registrieren</button>
+      <button id="emailLoginBtn" class="blue-button gray">Einloggen</button>
+      <button id="googleLoginBtn" class="blue-button gray">Mit Google</button>
+    </section>
+  </dialog>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
