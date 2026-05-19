@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#3b82f6" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Math Hero" />
+  <title>Math Hero</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/icon-192.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="toast" class="toast hidden"></div>
+
+  <main class="app-shell">
+    <header class="top-hero">
+      <div class="top-row">
+        <button id="avatarBtn" class="avatar-btn" aria-label="Profil">🧒</button>
+        <div>
+          <p class="eyebrow" data-i18n="welcome">Willkommen</p>
+          <h1 id="appTitle">🧠 Math Hero</h1>
+        </div>
+        <div class="top-actions">
+          <button id="themeBtn" class="round-btn" aria-label="Theme">🌙</button>
+          <button id="settingsBtn" class="round-btn" aria-label="Settings">⚙️</button>
+        </div>
+      </div>
+
+      <div class="language-row">
+        <button class="lang-btn active" data-lang="ua">🇺🇦 UA</button>
+        <button class="lang-btn" data-lang="de">🇩🇪 DE</button>
+        <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+      </div>
+
+      <section class="stats-strip">
+        <div class="pill">⭐ <span id="xpText">0</span> XP</div>
+        <div class="pill">🎮 <span data-i18n="level">Level</span> <span id="levelText">1</span></div>
+        <div class="pill">🔥 <span id="streakText">0</span></div>
+      </section>
+
+      <div class="progress-wrap">
+        <div class="progress-label"><span data-i18n="todayProgress">Heute</span><b id="progressText">0%</b></div>
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      </div>
+    </header>
+
+    <section id="homeView" class="view active">
+      <div class="event-card">
+        <div>
+          <p class="eyebrow" data-i18n="dailyBonus">Tagesbonus</p>
+          <h2>🔥 x2 XP</h2>
+          <p data-i18n="dailyBonusText">Schaffe 20 Aufgaben ohne Fehler und bekomme Extra-XP.</p>
+        </div>
+        <button id="continueBtn" class="primary-btn">▶️ <span data-i18n="continue">Weiter</span></button>
+      </div>
+
+      <section class="card">
+        <div class="section-title">
+          <h2 data-i18n="modes">Modus</h2>
+          <span id="modeName">🟢 Leicht</span>
+        </div>
+        <div class="mode-grid">
+          <button class="mode-btn active" data-mode="easy">🟢 <span data-i18n="easy">Leicht</span></button>
+          <button class="mode-btn" data-mode="medium">🟡 <span data-i18n="medium">Mittel</span></button>
+          <button class="mode-btn" data-mode="hard">🔴 <span data-i18n="hard">Schwer</span></button>
+          <button class="mode-btn" data-mode="turbo">🟣 Turbo</button>
+        </div>
+      </section>
+
+      <section class="card game-card">
+        <div class="section-title">
+          <h2 data-i18n="tasks">Aufgaben</h2>
+          <span><b id="correctText">0</b> / 20</span>
+        </div>
+        <div id="questions" class="questions"></div>
+        <div class="sticky-actions">
+          <button id="newBtn" class="secondary-btn">🔁 <span data-i18n="newTasks">Neue Aufgaben</span></button>
+          <button id="checkBtn" class="success-btn">✅ <span data-i18n="check">Prüfen</span></button>
+        </div>
+      </section>
+    </section>
+
+    <section id="gamesView" class="view">
+      <section class="card">
+        <h2>🎮 <span data-i18n="games">Spiele</span></h2>
+        <div class="feature-list">
+          <button class="feature" data-game="speed">⚡ Speed Math <small>60 Sekunden</small></button>
+          <button class="feature" data-game="boss">👑 Boss Battle <small>20 perfekte Aufgaben</small></button>
+          <button class="feature" data-game="memory">🧩 Memory Math <small>bald</small></button>
+        </div>
+      </section>
+    </section>
+
+    <section id="leaderView" class="view">
+      <section class="card">
+        <h2>🏆 <span data-i18n="leaderboard">Rangliste</span></h2>
+        <div id="leaderboardList" class="leaderboard"></div>
+      </section>
+    </section>
+
+    <section id="friendsView" class="view">
+      <section class="card">
+        <h2>👥 <span data-i18n="friends">Freunde</span></h2>
+        <p data-i18n="friendsText">Später: Freunde einladen und gegeneinander rechnen.</p>
+        <button id="shareBtn" class="primary-btn">📨 <span data-i18n="share">Teilen</span></button>
+      </section>
+    </section>
+
+    <section id="profileView" class="view">
+      <section class="profile-hero">
+        <div class="big-avatar">🧒</div>
+        <h2 id="profileName">Gast</h2>
+        <p><span id="profileXp">0</span> XP · Level <span id="profileLevel">1</span></p>
+        <button id="loginBtn" class="primary-btn">🔐 Login / Register</button>
+        <button id="logoutBtn" class="secondary-btn hidden">Abmelden</button>
+      </section>
+
+      <section class="card">
+        <h2>🔥 Streak</h2>
+        <div id="weekRow" class="week-row"></div>
+      </section>
+
+      <section class="card">
+        <h2>🏅 <span data-i18n="achievements">Erfolge</span></h2>
+        <div id="badges" class="badges"></div>
+      </section>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-view="homeView">🏠<span data-i18n="home">Home</span></button>
+    <button class="nav-btn" data-view="gamesView">🎮<span data-i18n="games">Spiele</span></button>
+    <button class="nav-btn" data-view="leaderView">🏆<span data-i18n="rank">Rang</span></button>
+    <button class="nav-btn" data-view="friendsView">👥<span data-i18n="friends">Freunde</span></button>
+    <button class="nav-btn" data-view="profileView">👤<span data-i18n="profile">Profil</span></button>
+  </nav>
+
+  <dialog id="authDialog" class="modal">
+    <form method="dialog" class="modal-content">
+      <h2>🔐 Math Hero</h2>
+      <input id="emailInput" type="email" placeholder="E-Mail" />
+      <input id="passwordInput" type="password" placeholder="Passwort min. 6 Zeichen" />
+      <button id="registerBtn" type="button" class="primary-btn">Registrieren</button>
+      <button id="emailLoginBtn" type="button" class="secondary-btn">Einloggen</button>
+      <button id="googleLoginBtn" type="button" class="secondary-btn">Mit Google</button>
+      <button class="ghost-btn">Schließen</button>
+    </form>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
