@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Math Hero</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.svg" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- ТІЛЬКИ ВЕРХНЄ МЕНЮ ЯК У DUOLINGO -->
+  <header class="duo-header">
+    <button class="duo-chip" data-panel="language">🇺🇦 <b id="langScore">6</b></button>
+    <button class="duo-chip" data-panel="streak">🔥 <b id="streakText">0</b></button>
+    <button class="duo-chip" data-panel="xp">⭐ <b id="xpText">0</b></button>
+    <button class="duo-chip" data-panel="energy">⚡ <b id="energyText">25</b></button>
+  </header>
+
+  <main class="app">
+    <section id="homeView" class="view active">
+      <section class="event-card">
+        <div>
+          <p class="eyebrow">Денний бонус</p>
+          <h2>🔥 x2 XP</h2>
+          <p>Зроби 20 завдань без помилок і отримай додатковий XP.</p>
+        </div>
+        <button id="continueBtn" class="primary-btn">▶️ Продовжити</button>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <h2>Режим</h2>
+          <button class="small-link" data-panel="mode"><span id="modeName">🟢 Легкий</span> ▾</button>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <div class="stat-card">✅ <b id="correctText">0</b> / 20</div>
+        <div class="stat-card">🏆 Рекорд: <b id="bestText">0</b></div>
+        <div class="stat-card">⭐ XP: <b id="xpText2">0</b></div>
+        <div class="stat-card">🎮 Рівень: <b id="levelText">1</b></div>
+      </section>
+
+      <section class="card game-card">
+        <div class="section-title">
+          <h2>Завдання</h2>
+          <span><b id="progressText">0</b> / 20</span>
+        </div>
+        <div id="questions" class="questions"></div>
+        <div class="sticky-actions">
+          <button id="newBtn" class="secondary-btn">🔁 Нові завдання</button>
+          <button id="checkBtn" class="success-btn">✅ Перевірити</button>
+        </div>
+      </section>
+    </section>
+
+    <section id="gamesView" class="view">
+      <section class="card">
+        <h2>🎮 Ігри</h2>
+        <button class="feature" data-game="speed">⚡ Speed Math <small>60 секунд</small></button>
+        <button class="feature" data-game="boss">👑 Boss Battle <small>20 без помилок</small></button>
+        <button class="feature" data-game="memory">🧩 Memory Math <small>скоро</small></button>
+      </section>
+    </section>
+
+    <section id="leaderView" class="view">
+      <section class="card">
+        <h2>🏆 Ранг</h2>
+        <div id="leaderboardList" class="leaderboard"></div>
+      </section>
+    </section>
+
+    <section id="friendsView" class="view">
+      <section class="card">
+        <h2>👥 Друзі</h2>
+        <p>Запрошуй друзів і змагайся.</p>
+        <button id="shareBtn" class="primary-btn">📨 Поділитися</button>
+      </section>
+    </section>
+
+    <section id="profileView" class="view">
+      <section class="profile-hero">
+        <div class="big-avatar">🧒</div>
+        <h2 id="profileName">Гість</h2>
+        <p><span id="profileXp">0</span> XP · Рівень <span id="profileLevel">1</span></p>
+        <button id="loginBtn" class="primary-btn">🔐 Login / Register</button>
+        <button id="logoutBtn" class="secondary-btn hidden">Вийти</button>
+      </section>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-view="homeView">🏠<span>Головна</span></button>
+    <button class="nav-btn" data-view="gamesView">🎮<span>Ігри</span></button>
+    <button class="nav-btn" data-view="leaderView">🏆<span>Ранг</span></button>
+    <button class="nav-btn" data-view="friendsView">👥<span>Друзі</span></button>
+    <button class="nav-btn" data-view="profileView">👤<span>Профіль</span></button>
+  </nav>
+
+  <dialog id="panelDialog" class="modal">
+    <div class="modal-head">
+      <button id="closePanel">×</button>
+      <h2 id="panelTitle">Меню</h2>
+      <span></span>
+    </div>
+    <div id="panelBody" class="modal-body"></div>
+  </dialog>
+
+  <dialog id="authDialog" class="modal">
+    <div class="modal-head">
+      <button id="closeAuth">×</button>
+      <h2>Login</h2>
+      <span></span>
+    </div>
+    <div class="auth-box google-only">
+      <p class="login-help">Melde dich sicher mit Google an.</p>
+      <button id="googleLoginBtn" class="google-btn">🔵 Mit Google einloggen</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
